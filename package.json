@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:server": "ts-node server/index.ts",
-    "start:server:dev": "nodemon server/index.ts"
+    "start:server:dev": "nodemon server/index.ts",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Oladimeji Akande",
@@ -44,5 +45,8 @@
     "ts-loader": "^9.2.6",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
