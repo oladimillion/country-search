@@ -4,22 +4,20 @@ import log from "../helper/logger";
 export default {
   connect: async () => {
     try {
-      const URI = process.env.MONGODB_URI as string;;
-      const db = await mongoose.connect(URI)
+      const URI = process.env.MONGODB_URI as string;
+      const db = await mongoose.connect(URI);
 
-      log.info('Connected to DB');
+      log.info("Connected to DB");
 
       // if the Node process ends, close mongoose connection
       process.on("SIGINT", () => {
-        db.disconnect()
+        db.disconnect();
         log.info("Mongoose default connection closed through app termination");
         process.exit(0);
-      })
-
-    } catch(err) {
+      });
+    } catch (err) {
       log.error("db error: ", err);
       process.exit(1);
     }
-  }
-}
-
+  },
+};

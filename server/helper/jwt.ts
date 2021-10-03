@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 
 type Decoded = {
-  user?: string | null
-}
+  user?: string | null;
+};
 
 export default {
   encode: (data: Object, options?: jwt.SignOptions | undefined): string => {
@@ -12,7 +12,7 @@ export default {
     try {
       return jwt.verify(token, process.env.SECRET_KEY as string) as Decoded;
     } catch (e) {
-      return { user: null }
+      return { user: null };
     }
   },
-}
+};

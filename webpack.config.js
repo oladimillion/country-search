@@ -1,68 +1,59 @@
-const path = require('path');
+const path = require("path");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-  mode: isProduction ? 'production' : 'development',
+  mode: isProduction ? "production" : "development",
   bail: isProduction,
   context: path.join(__dirname),
   entry: {
-    src: path.resolve(__dirname, 'client/index.ts'),
+    src: path.resolve(__dirname, "client/index.ts"),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: './bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "./bundle.js",
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: [".tsx", ".ts", ".js"],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
       {
         test: /\.jsx?$/,
-        use: [
-          'babel-loader',
-        ],
+        use: ["babel-loader"],
       },
       {
         test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'less-loader',
-        ],
+        use: ["style-loader", "css-loader", "less-loader"],
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/'
-            }
-          }
-        ]
+              name: "[name].[ext]",
+              outputPath: "fonts/",
+            },
+          },
+        ],
       },
       {
         test: /\.svg$/,
         use: [
           {
-            loader: 'svg-url-loader',
+            loader: "svg-url-loader",
             options: {
               limit: 10000,
             },
@@ -72,9 +63,9 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
-          'file-loader',
+          "file-loader",
           {
-            loader: 'image-webpack-loader',
+            loader: "image-webpack-loader",
             options: {
               bypassOnDebug: true, // webpack@1.x
               disable: true, // webpack@2.x and newer
@@ -86,13 +77,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'client/public/index.html',
+      template: "client/public/index.html",
     }),
   ],
   devServer: {
     compress: true,
     historyApiFallback: true, // respond to 404s with index.html
-    host: 'localhost',
+    host: "localhost",
     hot: true, // enable HMR on the server
     port: 3000,
   },
@@ -101,9 +92,9 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          reuseExistingChunk: true
-        }
-      }
-    }
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
 };

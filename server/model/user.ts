@@ -1,5 +1,5 @@
-import mongoose from "mongoose"
-import bcrypt from "bcrypt"
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 export interface UserDocument extends mongoose.Document {
   username: string;
@@ -15,32 +15,31 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
   },
   { timestamps: true }
-)
+);
 
 UserSchema.pre("save", async function (next: Function) {
-  const user = this as UserDocument
+  const user = this as UserDocument;
 
   // making sure only new password is hashed
-  if (!user.isModified("password")) return next()
+  if (!user.isModified("password")) return next();
 
   // @ts-ignore
-  const salt = await bcrypt.genSalt(+process.env.SALT_FACTOR)
+  const salt = await bcrypt.genSalt(+process.env.SALT_FACTOR);
 
-  const hash = await bcrypt.hashSync(user.password, salt)
+  const hash = await bcrypt.hashSync(user.password, salt);
 
-  user.password = hash
+  user.password = hash;
 
-  return next()
-})
-
+  return next();
+});
 
 UserSchema.methods.comparePassword = async function (password: string) {
-  const user = this as UserDocument
+  const user = this as UserDocument;
   try {
-    return bcrypt.compare(password, user.password)
-  } catch(e) {
-    return false
+    return bcrypt.compare(password, user.password);
+  } catch (e) {
+    return false;
   }
-}
+};
 
-export default mongoose.model<UserDocument>("User", UserSchema)
+export default mongoose.model<UserDocument>("User", UserSchema);
