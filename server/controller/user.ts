@@ -6,13 +6,16 @@ import {
   createAuthTokens,
   validateCredential,
 } from "../service/user";
+import session from "../service/session";
 import log from "../helper/logger";
+import token from "../helper/token";
 
 const signup = async (req: Request, res: Response) => {
   try {
     const user = await createUser(req.body);
-    const authTokens = createAuthTokens(get(user, "_id"));
-    return res.status(201).json(authTokens);
+    const { accessToken, refreshToken } = createAuthTokens(get(user, "_id"));
+    session.set(accessToken, refreshToken, req);
+    return res.status(201).json({ token: accessToken });
   } catch (e) {
     log.error(e as any);
     const message = get(e, "message");
@@ -28,9 +31,10 @@ const signin = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const isValid = await validateCredential(username, password);
     if (isValid) {
-      const user = findUser({ username });
-      const authTokens = createAuthTokens(get(user, "_id"));
-      return res.status(200).json(authTokens);
+      const user = await findUser({ username });
+      const { accessToken, refreshToken } = createAuthTokens(get(user, "_id"));
+      session.set(accessToken, refreshToken, req);
+      return res.status(200).json({ token: accessToken });
     }
     return res
       .status(401)
@@ -47,4 +51,10 @@ const getUser = async (req: Request, res: Response) => {
   return res.status(200).json(omit(user, ["password"]));
 };
 
-export default { signup, signin, getUser };
+const signout = async (req: Request, res: Response) => {
+  const accessToken = token.get(req);
+  session.delete(accessToken);
+  return res.sendStatus(200);
+};
+
+export default { signup, signin, getUser, signout };

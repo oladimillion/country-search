@@ -14,6 +14,7 @@ router.get("/app-health", (req: Request, res: Response) => res.sendStatus(200));
 
 router.post("/api/v1/signin", validateRequest(userSchema), userCtrl.signin);
 router.post("/api/v1/signup", validateRequest(userSchema), userCtrl.signup);
+router.post("/api/v1/signout", mustBeAuthenticated, userCtrl.signout);
 router.get("/api/v1/user", mustBeAuthenticated, userCtrl.getUser);
 router.get(
   "/api/v1/country/search",
@@ -23,12 +24,12 @@ router.get(
 );
 
 router.use((req: Request, res: Response) =>
-  res.status(404).json({ message: "route does not exist" })
+  res.status(404).json({ message: "Route does not exist" })
 );
 
 router.use((err: object, req: Request, res: Response, next: NextFunction) => {
   log.error(get(err, "stack"));
-  return res.status(500).json("Server error");
+  return res.status(500).json({ message: "Server error" });
 });
 
 export default router;

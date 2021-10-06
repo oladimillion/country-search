@@ -6,7 +6,7 @@ import log from "../helper/logger";
 const search = async (req: Request, res: Response) => {
   const API_KEY = process.env.COUNTRY_SEARCH_API_KEY;
   const URL = process.env.COUNTRY_SEARCH_URI;
-  const { country_name } = req.body;
+  const { country_name } = req.query;
   const PATH = `${URL}/${country_name}?access_key=${API_KEY}&FullText=true`;
 
   try {
