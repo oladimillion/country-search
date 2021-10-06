@@ -9,14 +9,18 @@ module.exports = {
   bail: isProduction,
   context: path.join(__dirname),
   entry: {
-    src: path.resolve(__dirname, "client/index.ts"),
+    src: path.resolve(__dirname, "client/index.tsx"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "./bundle.js",
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    alias: {
+      react: path.resolve(__dirname, "node_modules", "react"),
+      "react-dom": path.resolve(__dirname, "node_modules", "react-dom"),
+    },
   },
   module: {
     rules: [
@@ -38,13 +42,12 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|svg|x-font-ttf)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: "file-loader",
+            loader: "url-loader",
             options: {
-              name: "[name].[ext]",
-              outputPath: "fonts/",
+              limit: 8192,
             },
           },
         ],
@@ -63,12 +66,10 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
-          "file-loader",
           {
-            loader: "image-webpack-loader",
+            loader: "url-loader",
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
+              limit: 8192,
             },
           },
         ],

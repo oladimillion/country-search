@@ -23,12 +23,12 @@ router.get(
 );
 
 router.use((req: Request, res: Response) =>
-  res.status(404).json({ message: "route does not exist" })
+  res.status(404).json({ message: "Route does not exist" })
 );
 
 router.use((err: object, req: Request, res: Response, next: NextFunction) => {
   log.error(get(err, "stack"));
-  return res.status(500).json("Server error");
+  return res.status(500).json({ message: "Server error" });
 });
 
 export default router;

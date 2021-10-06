@@ -10,9 +10,12 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   );
   const refreshToken = get(req, "headers.x-refresh");
 
+  // console.log(req.ip + req.headers["user-agent"])
+
   if (!accessToken) return next();
 
   const decoded = jwt.decode(accessToken);
+  // console.log(decoded)
 
   if (decoded.user) {
     // @ts-ignore

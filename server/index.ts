@@ -4,7 +4,7 @@ import db from "./db";
 import router from "./router";
 import headerToken from "./middleware/headerToken";
 import requestLogger from "./middleware/requestLogger";
-import cors from "./middleware/cors";
+import cors from "cors";
 import rateLimiter from "./middleware/rateLimiter";
 
 // loading .env variables
@@ -14,11 +14,10 @@ const app = express();
 
 const PORT = process.env.PORT as string;
 
-app.use(cors);
-
 app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 // limit max request per minute to 30
 app.use(rateLimiter);

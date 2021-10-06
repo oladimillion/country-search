@@ -1,5 +1,5 @@
 export default {
-  body: {
+  query: {
     country_name: "required",
   },
 };

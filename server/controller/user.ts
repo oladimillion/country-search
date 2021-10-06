@@ -11,8 +11,8 @@ import log from "../helper/logger";
 const signup = async (req: Request, res: Response) => {
   try {
     const user = await createUser(req.body);
-    const authTokens = createAuthTokens(get(user, "_id"));
-    return res.status(201).json(authTokens);
+    const { accessToken } = createAuthTokens(get(user, "_id"));
+    return res.status(201).json({ token: accessToken });
   } catch (e) {
     log.error(e as any);
     const message = get(e, "message");
@@ -28,9 +28,9 @@ const signin = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const isValid = await validateCredential(username, password);
     if (isValid) {
-      const user = findUser({ username });
-      const authTokens = createAuthTokens(get(user, "_id"));
-      return res.status(200).json(authTokens);
+      const user = await findUser({ username });
+      const { accessToken } = createAuthTokens(get(user, "_id"));
+      return res.status(200).json({ token: accessToken });
     }
     return res
       .status(401)
