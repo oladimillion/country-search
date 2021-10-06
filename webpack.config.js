@@ -12,7 +12,7 @@ module.exports = {
     src: path.resolve(__dirname, "client/index.tsx"),
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "dist/client"),
     filename: "./bundle.js",
   },
   resolve: {
