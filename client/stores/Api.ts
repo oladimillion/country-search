@@ -13,7 +13,9 @@ export class Api extends Store {
   }
 
   get baseURL() {
-    return this.__dev__ ? "http://127.0.0.1:8000" : "";
+    return this.__dev__
+      ? "http://127.0.0.1:8000"
+      : "https://ola-country-search.herokuapp.com";
   }
 
   get token() {
