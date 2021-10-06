@@ -11,6 +11,7 @@
 
 # production
 /build
+dist
 
 db.sqlite3
 npm-debug.log*
