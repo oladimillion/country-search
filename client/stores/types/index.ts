@@ -33,7 +33,7 @@ export interface IAccountStore {
   username: string | undefined;
   load(): void;
   reset(): void;
-  logout(): void;
+  signout(): void;
   signin(p: object): Promise<any>;
   signup(p: object): Promise<any>;
   getSelf(): Promise<any>;

@@ -13,11 +13,11 @@ export const connect = compose(
   withCustomRouter,
   withData((props: Props) => {
     const { accountStore, redirectToPath } = props;
-    const logout = async () => {
-      await accountStore.logout();
+    const signout = async () => {
+      await accountStore.signout();
       redirectToPath("/login");
     };
-    return { logout };
+    return { signout };
   }),
   observer
 );

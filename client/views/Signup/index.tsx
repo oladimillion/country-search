@@ -40,8 +40,8 @@ const SigupFormView = (props: Props) => {
 
     try {
       const data = await accountStore.signup(payload);
-      // localStorage.setItem('token', data.token)
-      // redirectToPath('/')
+      localStorage.setItem("token", data.token);
+      redirectToPath("/");
     } catch (e: any) {
       const { data } = e?.response || {};
       if (check.object(data)) {

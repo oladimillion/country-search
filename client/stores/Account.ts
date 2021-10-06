@@ -20,7 +20,7 @@ export class Account extends Store implements IAccountStore {
       signin: action,
       signup: action,
       getSelf: action,
-      logout: action,
+      signout: action,
     });
   }
 
@@ -50,7 +50,8 @@ export class Account extends Store implements IAccountStore {
     return { self: this.self };
   };
 
-  logout = () => {
+  signout = async () => {
+    await this.api.post("signout", {});
     localStorage.removeItem("token");
     this.resetStores();
   };

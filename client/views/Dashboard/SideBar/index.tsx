@@ -16,12 +16,12 @@ import {
 import { INavigationStore } from "../../../stores/types";
 
 type Props = {
-  logout(): void;
+  signout(): void;
   navigationStore: INavigationStore;
 };
 
 const SideBarView = (props: Props) => {
-  const { navigationStore, logout } = props;
+  const { navigationStore, signout } = props;
   const { navItems, showSideBar } = navigationStore;
 
   return (
@@ -43,7 +43,7 @@ const SideBarView = (props: Props) => {
               </NavItemWrapper.Item>
             ))}
           </NavItemWrapper>
-          <LogoutButton onClick={logout}>
+          <LogoutButton onClick={signout}>
             <LogoutButton.Icon />
             Log out
           </LogoutButton>

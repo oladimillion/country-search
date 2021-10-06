@@ -23,7 +23,6 @@ export class Country extends Store implements ICountryStore {
 
   search = async (name: string) => {
     const query = getQueryParams({ country_name: name });
-    this.data = [];
     const { data } = await this.api.get(`country/search?${query}`);
     this.data = data;
     return data;

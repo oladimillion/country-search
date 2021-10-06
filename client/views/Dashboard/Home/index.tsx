@@ -24,13 +24,11 @@ const Home = (props: Props) => {
         />
       </FlexBox>
       <FlexBox>
-        {!isEmptyValue(countryStore.data) && (
-          <List
-            {...countryStore}
-            selectedCountry={selectedCountry}
-            setSelectedCountry={setSelectedCountry}
-          />
-        )}
+        <List
+          {...countryStore}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         {!isEmptyValue(selectedCountry) && (
           <Detail data={selectedCountry as any} />
         )}

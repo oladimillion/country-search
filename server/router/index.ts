@@ -14,6 +14,7 @@ router.get("/app-health", (req: Request, res: Response) => res.sendStatus(200));
 
 router.post("/api/v1/signin", validateRequest(userSchema), userCtrl.signin);
 router.post("/api/v1/signup", validateRequest(userSchema), userCtrl.signup);
+router.post("/api/v1/signout", mustBeAuthenticated, userCtrl.signout);
 router.get("/api/v1/user", mustBeAuthenticated, userCtrl.getUser);
 router.get(
   "/api/v1/country/search",

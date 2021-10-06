@@ -19,14 +19,26 @@ const mapProperties = {
     label: "Region",
   },
   altSpellings: {
-    label: "Calling Codes",
+    label: "Alternative Spelling(s)",
+    getValue: (data?: Array<string>) => {
+      return data?.join(", ");
+    },
+  },
+  callingCodes: {
+    label: "Calling Code(s)",
     getValue: (data?: Array<string>) => {
       return data?.join(", ");
     },
   },
 };
 
-const ordering = ["capital", "region", "altSpellings", "alpha2Code"];
+const ordering = [
+  "capital",
+  "region",
+  "altSpellings",
+  "alpha2Code",
+  "callingCodes",
+];
 
 const renderCountryDetail = (data: Props["data"]) => {
   return ordering.map((key: string) => {
@@ -61,15 +73,4 @@ export const Detail = (props: Props) => {
       </Card>
     </FlexBox>
   );
-};
-
-Detail.defaultProps = {
-  data: {
-    name: "Nigeria",
-    alpha2Code: "NG",
-    callingCodes: ["234"],
-    capital: "Abuja",
-    altSpellings: ["NG", "Nijeriya", "Naíjíríà", "Federal Republic of Nigeria"],
-    region: "Africa",
-  },
 };
