@@ -6,7 +6,7 @@
   "scripts": {
     "build:client": "NODE_ENV=production webpack",
     "start:client": "NODE_ENV=development webpack serve",
-    "start:server": "tsc -p dist/ && node dist/server/index.js",
+    "start:server": "tsc -p . && node dist/server/index.js",
     "start:server:dev": "nodemon server/index.ts",
     "predeploy": "npm run build:client",
     "deploy": "gh-pages -d build:client",
