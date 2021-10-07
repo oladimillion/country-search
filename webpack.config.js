@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist/client"),
-    filename: "./bundle.js",
+    filename: "bundle.js",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
