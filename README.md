@@ -22,7 +22,11 @@ An application that allows searching of country by name
 
 ### Build the frontend app with below command
 
-`npm run build`
+`npm run build:client`
+
+### Build the backend app with below command
+
+`npm run build:server`
 
 ### Prettify the codebase using below command
 
@@ -38,7 +42,6 @@ An application that allows searching of country by name
 | Auth user detail | GET         | /api/v1/user                              |
 | Country Search   | GET         | /api/v1/country/search?country_name=:name |
 
-### Live URL
+### Live App
 
-Backend: https://ola-country-search.herokuapp.com/
-Frontend: https://ola-country-search.netlify.app/
+https://ola-country-search.netlify.app/
