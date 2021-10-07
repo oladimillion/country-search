@@ -40,20 +40,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var redis_1 = __importDefault(require("../helper/redis"));
+var logger_1 = __importDefault(require("../helper/logger"));
 exports.default = {
-    set: function (accessToken, refreshToken, req) {
-        try {
-            return redis_1.default.set(accessToken, JSON.stringify({
-                refreshToken: refreshToken,
-                ip: req.ip,
-                userAgent: req.headers["user-agent"],
-            }));
-        }
-        catch (e) {
-            // @ts-ignore
-            return null;
-        }
-    },
+    set: function (accessToken, refreshToken, req) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            try {
+                redis_1.default.set(accessToken, JSON.stringify({
+                    refreshToken: refreshToken,
+                    ip: req.ip,
+                    userAgent: req.headers["user-agent"],
+                }));
+            }
+            catch (e) {
+                logger_1.default.error(e);
+            }
+            return [2 /*return*/];
+        });
+    }); },
     get: function (accessToken) { return __awaiter(void 0, void 0, void 0, function () {
         var data, e_1;
         return __generator(this, function (_a) {
@@ -63,11 +66,14 @@ exports.default = {
                     return [4 /*yield*/, redis_1.default.get(accessToken)];
                 case 1:
                     data = _a.sent();
+                    if (!data) {
+                        return [2 /*return*/, {}];
+                    }
                     return [2 /*return*/, JSON.parse(data)];
                 case 2:
                     e_1 = _a.sent();
-                    // @ts-ignore
-                    return [2 /*return*/, null];
+                    logger_1.default.error(e_1);
+                    return [2 /*return*/, {}];
                 case 3: return [2 /*return*/];
             }
         });
@@ -75,11 +81,10 @@ exports.default = {
     delete: function (accessToken) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             try {
-                return [2 /*return*/, redis_1.default.delete(accessToken)];
+                redis_1.default.delete(accessToken);
             }
             catch (e) {
-                // @ts-ignore
-                return [2 /*return*/, null];
+                logger_1.default.error(e);
             }
             return [2 /*return*/];
         });
