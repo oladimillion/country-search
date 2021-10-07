@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var redis_1 = __importDefault(require("redis"));
 var logger_1 = __importDefault(require("./logger"));
-var client = redis_1.default.createClient();
+var client = redis_1.default.createClient({ url: process.env.REDIS_URL });
 client.on("error", function (error) {
     logger_1.default.error(error);
 });

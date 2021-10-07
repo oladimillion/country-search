@@ -1,7 +1,7 @@
 import redis from "redis";
 import log from "./logger";
 
-const client = redis.createClient();
+const client = redis.createClient({ url: process.env.REDIS_URL });
 
 client.on("error", function (error: any) {
   log.error(error);
