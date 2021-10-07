@@ -11,7 +11,8 @@
 
 # production
 /build
-dist
+dist/client/
+dist/webpack.config.js
 
 db.sqlite3
 npm-debug.log*
