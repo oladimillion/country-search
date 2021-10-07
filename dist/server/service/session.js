@@ -72,7 +72,16 @@ exports.default = {
             }
         });
     }); },
-    delete: function (accessToken) {
-        return redis_1.default.delete(accessToken);
-    },
+    delete: function (accessToken) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            try {
+                return [2 /*return*/, redis_1.default.delete(accessToken)];
+            }
+            catch (e) {
+                // @ts-ignore
+                return [2 /*return*/, null];
+            }
+            return [2 /*return*/];
+        });
+    }); },
 };

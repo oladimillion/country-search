@@ -30,7 +30,12 @@ export default {
       return null;
     }
   },
-  delete: (accessToken: string): Promise<any> => {
-    return redis.delete(accessToken);
+  delete: async (accessToken: string): Promise<any> => {
+    try {
+      return redis.delete(accessToken);
+    } catch (e) {
+      // @ts-ignore
+      return null;
+    }
   },
 };

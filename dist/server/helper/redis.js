@@ -35,7 +35,16 @@ var redisObject = {
         });
     },
     delete: function (key) {
-        return redisObject.set(key, "{}");
+        return new Promise(function (resolve, reject) {
+            client.del(key, function (err) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(key);
+                }
+            });
+        });
     },
 };
 exports.default = redisObject;
