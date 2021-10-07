@@ -1,14 +1,11 @@
 import { Request } from "express";
 import redis from "../helper/redis";
+import log from "../helper/logger";
 
 export default {
-  set: (
-    accessToken: string,
-    refreshToken: string,
-    req: Request
-  ): Promise<any> => {
+  set: async (accessToken: string, refreshToken: string, req: Request) => {
     try {
-      return redis.set(
+      redis.set(
         accessToken,
         JSON.stringify({
           refreshToken,
@@ -16,26 +13,27 @@ export default {
           userAgent: req.headers["user-agent"],
         })
       );
-    } catch (e) {
-      // @ts-ignore
-      return null;
+    } catch (e: any) {
+      log.error(e);
     }
   },
   get: async (accessToken: string): Promise<any> => {
     try {
       const data: any = await redis.get(accessToken);
+      if (!data) {
+        return {};
+      }
       return JSON.parse(data);
-    } catch (e) {
-      // @ts-ignore
-      return null;
+    } catch (e: any) {
+      log.error(e);
+      return {};
     }
   },
-  delete: async (accessToken: string): Promise<any> => {
+  delete: async (accessToken: string) => {
     try {
-      return redis.delete(accessToken);
-    } catch (e) {
-      // @ts-ignore
-      return null;
+      redis.delete(accessToken);
+    } catch (e: any) {
+      log.error(e);
     }
   },
 };
