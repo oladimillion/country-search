@@ -1,5 +1,5 @@
 const path = require("path");
-
+const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -79,6 +79,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "client/public/index.html",
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, "client/public/_redirects"), to: "." },
+      ],
     }),
   ],
   devServer: {
