@@ -2,6 +2,12 @@
 
 An application that allows searching of country by name
 
+### How the app works
+
+- Create an account if you have none
+- Sign in to the app with your credentials
+- Type in either part or the full name of the country you want to search
+
 ### Install `redis` on your host system
 
 [https://redis.io/download](https://redis.io/download)
@@ -31,6 +37,11 @@ An application that allows searching of country by name
 ### Prettify the codebase using below command
 
 `npm run prettify`
+
+### Screenshot
+
+![country search](https://user-images.githubusercontent.com/23438586/139609566-80a64484-e04a-4ff8-908b-b75f90cfff24.png)
+
 
 ### API endpoints
 
